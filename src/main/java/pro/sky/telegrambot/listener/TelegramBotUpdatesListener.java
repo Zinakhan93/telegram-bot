@@ -9,10 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.NotificationTask;
+import pro.sky.telegrambot.repository.NotificationRepository;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.aspectj.weaver.patterns.ISignaturePattern.PATTERN;
 
@@ -20,9 +23,16 @@ import static org.aspectj.weaver.patterns.ISignaturePattern.PATTERN;
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+    private static final Pattern PATTERN = Pattern.compile("([0-9\\.\\:\\s]{16})(\\s)([\\W+]+)");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private final NotificationRepository repository;
 
     @Autowired
     private TelegramBot telegramBot;
+
+    public TelegramBotUpdatesListener(NotificationRepository repository) {
+        this.repository = repository;
+    }
 
     @PostConstruct
     public void init() {
@@ -47,6 +57,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     }
                 }
             }
+            //            update.message().text();
             logger.info("Processing update: {}", update);
 
         });
