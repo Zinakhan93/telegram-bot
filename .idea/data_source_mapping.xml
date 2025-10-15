@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/3133d271-3ab7-4ec7-81df-346a7470e74c/console.sql" value="3133d271-3ab7-4ec7-81df-346a7470e74c" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/liquibase/scripts/create-notification-task.sql" value="3133d271-3ab7-4ec7-81df-346a7470e74c" />
+  </component>
+</project>
